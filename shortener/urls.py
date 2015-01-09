@@ -1,0 +1,9 @@
+from django.conf.urls import patterns, url
+
+
+urlpatterns = patterns('scgshort.shortener.views',
+    url(r'^$', 'index', name='index'),
+    url(r'^info/(?P<base62_id>\w+)$', 'info', name='info'),
+    url(r'^submit/$', 'submit', name='submit'),
+    url(r'^(?P<base62_id>\w+)$', 'follow', name='follow'),
+)
