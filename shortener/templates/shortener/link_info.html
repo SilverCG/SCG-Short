@@ -4,10 +4,15 @@
 {% block title %}Link info{% endblock %}
 
 {% block content %}
-<p>
-<a href="{% short_url link %}">{{ link.url }}</a> (Score: {{ link.usage_count }})
-<br/>
-<br/>
-Submitted on: {{ link.date_submitted|date:"M d, Y" }}
-</p>
+
+<h2>{% short_url link %}</h2>
+<h4><a href="{% short_url link %}">{{ link.url }}</a> </h4>
+<p>Submitted on: {{ link.date_submitted|date:"M d, Y" }}</p>
+<hr/>
+<h2> Click info (Score: {{ link.usage_count }})</h2>
+<ul>
+  {% for click in clicks %}
+    <li>{{ click.datetime }}</li>
+  {% endfor %}
+</ul>
 {% endblock %}

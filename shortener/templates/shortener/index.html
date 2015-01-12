@@ -2,19 +2,32 @@
 {% load shortener_helpers %}
 
 {% block content %}
+{% if your_links %}
+<h2>Your Links</h2>
+<ul>
+  {% for link in your_links %}
+    <li><a href="{% short_url link %}">{{ link.url }}</a> (Count: {{ link.usage_count }})
+    (<a href="{% url 'info' link.to_base62 %}">Info</a>)</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{% if recent_links %}
 <h2>Recent Links</h2>
 <ul>
   {% for link in recent_links %}
     <li><a href="{% short_url link %}">{{ link.url }}</a> (Count: {{ link.usage_count }})
-    (<a href="{% url info link.to_base62 %}">Info</a>)</li>
+    (<a href="{% url 'info' link.to_base62 %}">Info</a>)</li>
   {% endfor %}
 </ul>
-
+{% endif %}
+{% if most_popular_links %}
 <h2>Most Popular Links</h2>
 <ul>
   {% for link in most_popular_links %}
     <li><a href="{% short_url link %}">{{ link.url }}</a> (Count: {{ link.usage_count }})
-    (<a href="{% url info link.to_base62 %}">Info</a>)</li>
+    (<a href="{% url 'info' link.to_base62 %}">Info</a>)</li>
   {% endfor %}
 </ul>
+{% endif %}
 {% endblock content %}
